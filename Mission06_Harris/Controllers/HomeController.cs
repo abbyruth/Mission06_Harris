@@ -6,7 +6,11 @@ namespace Mission06_Harris.Controllers
 {
     public class HomeController : Controller
     {
-
+        private MoviesContext _movieContext;
+        public HomeController(MoviesContext temp)
+        {
+            _movieContext = temp;
+        }
         public IActionResult Index()
         {
             return View();
