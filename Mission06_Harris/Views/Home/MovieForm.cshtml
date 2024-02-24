@@ -1,17 +1,26 @@
 ﻿@model Mission06_Harris.Models.Movie
-<!-- Category, Title, Year, Director, Rating (dropdown), Edited (yes/no--true/false), Lent to, Notes(limited 25 chars)
-edited, lent to, notes not required to enter a new field, the rest are 
--->
+
 @{
     ViewData["Title"] = "Add Movie";
 }
+<!--This is a form so someone can add a movie to the database -->
 <h1>Movie Form</h1>
 <br />
 <form method="post">
-    <label asp-for="Category">Category: </label>
-    <input asp-for="Category"/><br /><br />
+
+    <input type="hidden" asp-for="MovieId" />
+    <br /><br />
+
     <label asp-for="Title">Title: </label>
     <input asp-for="Title" /><br /><br />
+    <label asp-for="Category">Category: </label>
+    <select asp-for="CategoryId">
+        <option value="">Select a Category</option>
+        @foreach (Category c in ViewBag.Categories)
+        {
+            <option value="@c.CategoryId">@c.CategoryName</option>
+        }
+    </select><br /><br />
     <label asp-for="Year">Year: </label>
     <input asp-for="Year" /><br /><br />
     <label asp-for="Director">Director: </label>
@@ -33,8 +42,15 @@ edited, lent to, notes not required to enter a new field, the rest are
     <label asp-for="LentTo">Lent to: </label>
     <input asp-for="LentTo"/>
     <br /><br />
+    <label asp-for="CopiedToPlex">CopiedToPlex</label>
+    <select asp-for="CopiedToPlex">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+    <br /><br />
     <label asp-for="Notes">Notes: </label>
     <input asp-for="Notes" />
     <br /><br />
     <button type="Submit">Submit the application</button>
+    <div asp-validation-summary="All"></div>
 </form>
